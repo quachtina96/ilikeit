@@ -32,6 +32,7 @@ app.get('/', async (req, res) =>  {
 	// } else {
 	// 	res.send('page to return is undefined!')
 	// }
+	res.send(JSON.stringify(req.params))
 });
 
 
