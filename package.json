@@ -1,0 +1,25 @@
+{
+  "name": "ilikeit",
+  "version": "1.0.0",
+  "description": "website for ilikeit button",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quachtina96/ilikeit.git"
+  },
+  "author": "Tina Quach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quachtina96/ilikeit/issues"
+  },
+  "homepage": "https://github.com/quachtina96/ilikeit#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
