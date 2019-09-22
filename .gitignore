@@ -4,3 +4,5 @@ run.sh
 npm-debug.log
 .DS_Store
 /*.env
+
+devnotes*
