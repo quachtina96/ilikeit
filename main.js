@@ -9,7 +9,6 @@ app.listen(port, () => {
 })
 
 app.get('/', async (req, res) =>  {
-	console.log(req.params);
 
 	// var authPostOptions = {
 	// 	uri: 'https://accounts.spotify.com/api/token',
@@ -32,7 +31,7 @@ app.get('/', async (req, res) =>  {
 	// } else {
 	// 	res.send('page to return is undefined!')
 	// }
-	res.send(JSON.stringify(req.params))
+	res.send(JSON.stringify(req))
 });
 
 
