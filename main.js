@@ -15,7 +15,6 @@ app.get('/', async (req, res) =>  {
 	// 	method: 'POST',
 	// 	grant_type: "authorization_code",
 	// 	code: authorization_code
-
 	// }
 
 	// 	var pageToReturn;
@@ -31,7 +30,7 @@ app.get('/', async (req, res) =>  {
 	// } else {
 	// 	res.send('page to return is undefined!')
 	// }
-	res.send(JSON.stringify(req))
+	res.send(req.query.code)
 });
 
 
