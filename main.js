@@ -9,7 +9,6 @@ app.listen(port, () => {
 })
 
 app.get('/', async (req, res) =>  {
-	console.log(window.location.href);
 	console.log(req.params);
 
 	// var authPostOptions = {
