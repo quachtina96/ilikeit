@@ -8,49 +8,51 @@ app.listen(port, () => {
 	console.log(`webhook is listening on port: ${port}`);
 })
 
+//https://accounts.spotify.com/authorize/?client_id=1acbf1f724124569918e0b27034a1a1a&response_type=code&redirect_uri=https://spotify-ilikeit.herokuapp.com/&scope=user-read-currently-playing%20playlist-modify-public%20user-library-modify
+
 app.get('/', async (req, res) =>  {
 
-	// var authPostOptions = {
-	// 	uri: 'https://accounts.spotify.com/api/token',
-	// 	method: 'POST',
-	// 	grant_type: "authorization_code",
-	// 	code: authorization_code
-	// }
+	var authPostOptions = {
+		uri: "https://accounts.spotify.com/api/token",
+		method: "POST",
+		grant_type: "authorization_code",
+		code: req.query.code,
+		redirect_uri: "https://spotify-ilikeit.herokuapp.com/",
+		body: {
+			client_id: process.env.CLIENT,
+			client_secret: process.env.CLIENT_SECRET
+		}
+	}
 
-	// 	var pageToReturn;
-	// await rp(authorizationRequestOptions, function (error, response, body) {
-	//   console.error('error:', error); // Print the error if one occurred
-	//   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-	//   if (body) {
-	//   	pageToReturn = body
-	//   } // Print the HTML for the Google homepage.
-	// });
-	// if (pageToReturn) {
-	// 	res.send(pageToReturn)
-	// } else {
-	// 	res.send('page to return is undefined!')
-	// }
-	res.send(req.query.code)
+	var result;
+	await rp(authorizationRequestOptions, function (error, response, body) {
+	  console.error('error:', error); // Print the error if one occurred
+	  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+	  if (body) {
+	  	console.log(body)
+	  	result = body;
+	  	// TODO: Send auth info to web server hosted by button.
+	  	// body.access_token
+	  	// body.expires_in
+	  	// body.refresh_token
+	  } // Print the HTML for the Google homepage.
+	});
+	if (result) {
+		var testCodeOptions = {
+			url: 'https://api.spotify.com/v1/me',
+			headers: {
+				"Authorization": `Bearer ${result.access_token}`
+			}
+		};
+		rp(testCodeOptions, (err, res, body) => {
+			var aboutMe = body
+			res.send({
+				result: result,
+				aboutMe: aboutMe
+			});
+		})
+	} else {
+		res.send('NO RESULT');
 });
 
 
-// var authPostOptions = {
-// 	uri: 'https://accounts.spotify.com/api/token',
-// 	method: 'POST',
-// 	grant_type: "authorization_code",
-// 	code: AQBppAMTrS_TfA1sFbhbGqM2XYZ7nbZFGMI8SA4m3nwdAT2NmgK9rjg5zYEliqfuQlri1-hhU1l-WAmNBTxk1or2TDist89WtSxq6xqnA3xVHLUifqgnOCLxjOAYmN-3F48LthNlgq4VWEZ0m3NoVb5Tv1HBtRXzY7Ye1kpC5hygdALHOJOratTFftZI0FH3Znka-7Ypu6VDI4C7ABmSUPW2Is41uiBJdRbr-csETSw8tHlBZ9nNa_B56-82qM-_blJffuB5171IeN5xAPeU6JAWRJo5szCrfg
-
-// }
-// rp(authPostOptions, (e,res,body) => {
-
-// })
-
-// https://accounts.spotify.com/authorize
-// var getUrl = () =>{
-// 	client_id = '1acbf1f724124569918e0b27034a1a1a'
-// 	redirect_uri = 'file:///Users/quacht/Documents/yanni/ilikeit/ilikeit.html'
-// 	console.log(`https://accounts.spotify.com/authorize/?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=user-read-currently-playing playlist-modify-public user-library-modify
-// // &show_dialog=true`)
-// }
-
-// getUrl()
