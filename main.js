@@ -13,13 +13,15 @@ app.listen(port, () => {
 app.get('/', async (req, res) =>  {
 
 	var authPostOptions = {
-		uri: "https://accounts.spotify.com/api/token",
+		url: "https://accounts.spotify.com/api/token",
 		method: "POST",
-		grant_type: "authorization_code",
-		code: req.query.code,
-		redirect_uri: "https://spotify-ilikeit.herokuapp.com/",
-		client_id: process.env.CLIENT,
-		client_secret: process.env.CLIENT_SECRET
+		form: {
+			grant_type: "authorization_code",
+			code: req.query.code,
+			redirect_uri: "https://spotify-ilikeit.herokuapp.com/",
+			client_id: process.env.CLIENT,
+			client_secret: process.env.CLIENT_SECRET
+		}
 	}
 
 	var result;
