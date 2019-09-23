@@ -53,6 +53,7 @@ app.get('/', async (req, res) =>  {
 		})
 	} else {
 		res.send('NO RESULT');
+	}
 });
 
 
