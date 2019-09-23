@@ -8,7 +8,7 @@ app.listen(port, () => {
 	console.log(`webhook is listening on port: ${port}`);
 })
 
-//https://accounts.spotify.com/authorize/?client_id=1acbf1f724124569918e0b27034a1a1a&response_type=code&redirect_uri=https://spotify-ilikeit.herokuapp.com/&scope=user-read-currently-playing%20playlist-modify-public%20user-library-modify
+// https://accounts.spotify.com/authorize/?client_id=1acbf1f724124569918e0b27034a1a1a&response_type=code&redirect_uri=https://spotify-ilikeit.herokuapp.com/&scope=user-read-currently-playing%20playlist-modify-public%20user-library-modify
 
 app.get('/', async (req, res) =>  {
 
@@ -18,14 +18,12 @@ app.get('/', async (req, res) =>  {
 		grant_type: "authorization_code",
 		code: req.query.code,
 		redirect_uri: "https://spotify-ilikeit.herokuapp.com/",
-		body: {
-			client_id: process.env.CLIENT,
-			client_secret: process.env.CLIENT_SECRET
-		}
+		client_id: process.env.CLIENT,
+		client_secret: process.env.CLIENT_SECRET
 	}
 
 	var result;
-	await rp(authorizationRequestOptions, function (error, response, body) {
+	await rp(authPostOptions, function (error, response, body) {
 	  console.error('error:', error); // Print the error if one occurred
 	  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 	  if (body) {
