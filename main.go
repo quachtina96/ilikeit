@@ -1,3 +1,8 @@
+// This file is mostly copied from the zmb3/spotify library which provides a wrapper around the
+// Spotify Web API in Golang (https://github.com/zmb3/spotify.git).
+// The exact file is:
+// https://github.com/zmb3/spotify/blob/master/examples/authenticate/authcode/authenticate.go
+
 // This example demonstrates how to authenticate with Spotify using the authorization code flow.
 // In order to run this example yourself, you'll need to:
 //
